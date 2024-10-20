@@ -1,0 +1,119 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css")
+    link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css")
+    link(href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap", rel="stylesheet")
+    link(rel="stylesheet" href="/assests/css/mypatients.css")
+    title My Patients
+  body 
+    //- Navigation Bar
+    header
+      .header-container
+        .logo
+          .image
+            i.fas.fa-hospital(style='font-size:60px')
+          .heading PULSECARE
+            .subheading Where Every Beat Matters
+        .sub
+          nav
+            ul
+              li
+                a(href="/mypatients") Patients
+              li
+                a(href="/history") History
+              li#log
+                a#log1(href="/login") Logout
+
+    //- Page Heading and Patients Section
+    main
+      h1 My Patients
+      p Here are your unconsulted patients.
+
+      //- Patients List Container
+      section.patients-container
+        div#patientsList
+
+    //- JavaScript to Fetch Data and Mark Consulted
+    script.
+      // Fetch and display patients
+      async function fetchPatients() {
+        try {
+          const response = await fetch('/unconsulted', {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          });
+
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+
+          const data = await response.json();
+          console.log(data);
+          displayPatients(data);
+        } catch (error) {
+          console.error('Error fetching patients:', error);
+          document.getElementById('patientsList').innerHTML = '<p style="color: red;">Failed to load patients.</p>';
+        }
+      }
+
+      // Function to display patients
+      function displayPatients(patients) {
+        const patientsListDiv = document.getElementById('patientsList');
+        patientsListDiv.innerHTML = ''; // Clear previous results
+
+        patients.forEach((appointment) => {
+          const patientDiv = document.createElement('div');
+          patientDiv.className = 'patient-card';
+          patientDiv.innerHTML = `
+            <h2>${appointment.patient.userName}</h2>
+            <p>Email: ${appointment.patient.emailId}</p>
+            <p>Age: ${appointment.patient.age}</p>
+            <p>Gender: ${appointment.patient.gender}</p>
+            <p>Problem Description: ${appointment.problemDescription}</p>
+            <p>Appointment Date: ${new Date(appointment.appointmentDate).toLocaleDateString()}</p>
+            <p>Appointment Time: ${appointment.appointmentTime}</p>
+            <button class="consult-btn" data-appointment-id="${appointment.patient._id}">Consult Patient</button>
+          `;
+
+          // Add event listener for the consult button
+          patientDiv.querySelector('.consult-btn').addEventListener('click', function () {
+            const appointmentId = this.getAttribute('data-appointment-id');
+            markAsConsulted(appointmentId, this);
+          });
+
+          patientsListDiv.appendChild(patientDiv);
+        });
+      }
+
+      // Function to mark an appointment as consulted
+      async function markAsConsulted(appointmentId, buttonElement) {
+        try {
+          const response = await fetch(`/complete/${appointmentId}`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          });
+
+          if (!response.ok) {
+            throw new Error('Failed to mark the patient as consulted.');
+          }
+
+          const data = await response.json();
+          console.log('Appointment updated:', data);
+
+          // Mark the button or card as consulted
+          buttonElement.textContent = 'Consulted';
+          buttonElement.disabled = true;
+          buttonElement.style.backgroundColor = 'green'; // Change the button's color after consulting
+        } catch (error) {
+          console.error('Error marking patient as consulted:', error);
+        }
+      }
+
+      window.onload = fetchPatients;

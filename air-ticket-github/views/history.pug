@@ -1,0 +1,73 @@
+doctype html
+html(lang="en")
+  head
+    title Appointment History
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    link(rel="stylesheet" href="/assests/css/history.css")
+  body
+    header
+      .header-container
+        .logo
+          .image
+            i.fas.fa-hospital(style='font-size:60px')
+          .heading PULSECARE
+            .subheading Where Every Beat Matters
+        .sub
+          nav
+            ul
+              li
+                a(href="/appointment") Book Appointment
+                a(href="/history") History
+              li#log
+                a#log1(href="/login") Logout
+
+    .container
+      h1 Appointment History
+
+      // Placeholder for appointments
+      .appointment-cards
+        p Loading appointments...
+    
+    script.
+      document.addEventListener('DOMContentLoaded', async function() {
+        try {
+          // Structured fetch call with async/await
+          const response = await fetch('/getappointmenthistory', {
+            method: 'GET', // Use GET method for fetching the history
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          });
+          
+          // Handle the response
+          const data = await response.json();
+          
+          if (data.appointments.length) {
+            const container = document.querySelector('.appointment-cards');
+            container.innerHTML = ''; // Clear the loading message
+
+            data.appointments.forEach(appointment => {
+              const appointmentCard = `
+                <div class="appointment-card">
+                  <div class="appointment-header">
+                    <h3>Doctor: ${appointment.doctorUsername}</h3>
+                    <span class="date">${new Date(appointment.appointmentDate).toLocaleDateString()}</span>
+                  </div>
+                  <div class="appointment-body">
+                    <p><strong>Time:</strong> ${appointment.appointmentTime}</p>
+                    <p><strong>Problem Description:</strong> ${appointment.problemDescription}</p>
+                    <p><strong>Consulted:</strong> ${appointment.consulted ? 'Yes' : 'No'}</p>
+                  </div>
+                </div>
+              `;
+              container.innerHTML += appointmentCard;
+            });
+          } else {
+            document.querySelector('.appointment-cards').innerHTML = '<p>No appointments found.</p>';
+          }
+        } catch (error) {
+          console.error("Error fetching appointment history:", error);
+          document.querySelector('.appointment-cards').innerHTML = '<p>Error loading appointments. Please try again later.</p>';
+        }
+      });

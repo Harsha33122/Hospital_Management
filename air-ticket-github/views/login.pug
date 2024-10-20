@@ -1,0 +1,81 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    title Hospital Login
+    link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css")
+    link(href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet")
+    link(rel="stylesheet", href="/assests/css/login_style.css")
+
+  header
+    .header-container
+      .logo
+        .image
+          i.fas.fa-hospital(style='font-size:60px')
+        .heading PULSECARE
+          .subheading Where Every Beat Matters
+      .sub
+        nav
+          ul
+            li
+              a(href="/") Home
+            li#log
+              a#log1(href="/login") Login/Register
+
+  body
+    .login-container
+      .form-box
+        h2 Login
+        form#loginForm
+          .input-group
+            label(for="userType") Select User:
+            select#userType(name="userType", required)
+              option(value="") -- Select User --
+              option(value="Doctor") Doctor
+              option(value="Patient") Patient
+              option(value="admin") admin
+
+          .input-group
+            label(for="emailId") Email:
+            input#emailId(type="email", name="emailId", placeholder="Enter your email", required)
+
+          .input-group
+            label(for="password") Password:
+            input#password(type="password", name="password", placeholder="Enter your password", required)
+
+          button(type="submit", class="login-btn") Login
+
+        //- Error message element
+        p#errorMessage(style="color: red; display: none;")
+
+        .register-section
+          p New here? 
+            a.register-link(href="/register") Register
+
+  footer.footer
+    .footer-content
+      .footer-section.hospital-info
+        h4 Hospital Management System
+        p &copy; 2024 Hospital Management System. All rights reserved.
+        p Providing quality healthcare and services for all your medical needs.
+      .footer-section.contact-info
+        h4 Contact Us
+        p Email: info@hospitalmanagement.com
+        p Phone: (123) 456-7890
+        p Address: 123 Health Street, City, State, 12345
+      .footer-section.quick-links
+        h4 Quick Links
+        ul
+          li
+            a(href="#about") About Us
+          li
+            a(href="/services") Our Services
+          li
+            a(href="/departments") Departments
+          li
+            a(href="/appointments") Book an Appointment
+          li
+            a(href="/contact") Contact Us
+
+    script(src="/assests/js/login_script.js")

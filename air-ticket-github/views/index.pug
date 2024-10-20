@@ -1,0 +1,217 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Hospital Management System
+    link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css")
+    link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css")
+    link(href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet")
+    link(rel="stylesheet" href="/assests/css/style.css")
+
+  header
+    .header-container
+      .logo
+        .image
+          i.fas.fa-hospital(style='font-size:60px')
+        .heading PULSECARE
+          .subheading Where Every Beat Matters
+      .sub
+        nav
+          ul
+            li
+              a(href="#home") Home
+            li
+              a(href="#doctor") Doctor
+            li
+              a(href="#appointment") Appointment
+            li
+              a(href="#about") About Us
+            li#log
+              a#log1(href="/login") Login/Register
+
+  main
+    section.intro#home
+      .text-content
+        h2 Welcome to Our Hospital Management System
+        p We provide a comprehensive solution for managing hospital operations, from patient registration to staff management. Explore our features and services to learn more.
+      .carousel
+        .carousel-wrapper
+          .carousel-images
+            .carousel-slide
+              img(src="./assests/images/cardi.jpg" alt="Hospital Image 1" class="carousel-img")
+            .carousel-slide
+              img(src="./assests/images/neuro.jpeg" alt="Hospital Image 2" class="carousel-img")
+            .carousel-slide
+              img(src="./assests/images/pulmo.webp" alt="Hospital Image 3" class="carousel-img")
+        button.prev-btn(onclick="prevImage()") &#10094;
+        button.next-btn(onclick="nextImage()") &#10095;
+
+  section.services
+    h2 Our Services
+    .service-list
+      .service-item
+        i.fas.fa-clinic-medical
+        h3 Emergency Care
+        p Providing immediate and effective care for emergencies.
+      .service-item
+        i.fas.fa-stethoscope
+        h3 General Checkups
+        p Routine examinations and health checkups for all patients.
+      .service-item
+        i.fas.fa-prescription-bottle-alt
+        h3 Pharmacy Services
+        p On-site pharmacy with a wide range of medications and prescriptions.
+      .service-item
+        i.fas.fa-flask
+        h3 Laboratory Services
+        p Comprehensive lab tests and diagnostics to support accurate diagnoses.
+      .service-item
+        i.fas.fa-brain
+        h3 Neurology
+        p Expert care for neurological conditions and disorders.
+      .service-item
+        i.fas.fa-heartbeat
+        h3 Cardiology
+        p Comprehensive care for cardiovascular health and diseases.
+
+  section.features
+    h2 Why Choose Us
+    .features-container
+      .feature-info
+        h3 Why Choose Us
+        p Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo erat amet.
+        .feature-icons
+          .icon-container
+            i.fas.fa-stethoscope
+            p Experience
+          .icon-container
+            i.fas.fa-tachometer-alt
+            p Quality
+          .icon-container
+            i.fas.fa-smile-beam
+            p Positive
+          .icon-container
+            i.fas.fa-clock
+            p 24 Hours
+      .feature-image
+        img(src="./assests/images/fea.jpg" alt="Feature Image")
+
+  section.doctors-info#doctor
+    h2 Our Doctors
+    .doctor-list
+      .doctor-item
+        img(src="./assests/images/doc1.jpeg" alt="Dr. Chaya Patil" class="doctor-img")
+        h3 Dr. Chaya Patil
+        p Specialist in Cardiology
+        .social-media
+          a(href="https://www.twitter.com/in/dr-chaya-patil" target="_blank" class="social-icon")
+            i.fab.fa-twitter
+          a(href="https://www.facebook.com/dr-chaya-patil" target="_blank" class="social-icon")
+            i.fab.fa-facebook-f
+          a(href="https://www.instagram.com/dr-chaya-patil" target="_blank" class="social-icon")
+            i.fab.fa-instagram
+      .doctor-item
+        img(src="./assests/images/doc2.jpeg" alt="Dr. Jane Smith" class="doctor-img")
+        h3 Dr. Jane Smith
+        p Neurologist
+        .social-media
+          a(href="https://www.twitter.com/in/dr-jane-smith" target="_blank" class="social-icon")
+            i.fab.fa-twitter
+          a(href="https://www.facebook.com/dr-jane-smith" target="_blank" class="social-icon")
+            i.fab.fa-facebook-f
+          a(href="https://www.instagram.com/dr-jane-smith" target="_blank" class="social-icon")
+            i.fab.fa-instagram
+      .doctor-item
+        img(src="./assests/images/doc3.jpeg" alt="Dr. Elena" class="doctor-img")
+        h3 Dr. Elena
+        p General Practitioner
+        .social-media
+          a(href="https://www.twitter.com/in/dr-elena" target="_blank" class="social-icon")
+            i.fab.fa-twitter
+          a(href="https://www.facebook.com/dr-elena" target="_blank" class="social-icon")
+            i.fab.fa-facebook-f
+          a(href="https://www.instagram.com/dr-elena" target="_blank" class="social-icon")
+            i.fab.fa-instagram
+
+  section.appointment-section#appointment
+    .appointment-container
+      .appointment-details
+        .appointment-tag Appointment
+        h2 Make An Appointment To Visit Our Doctor
+        p Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita erat ipsum et duo justo magna dolore erat amet
+        .sub-container
+          .contact-item
+            .icon-container1
+              i.fas.fa-phone-alt
+            .contact-info
+              p Call Us Now
+              p strong +012 345 6789
+          .contact-item
+            .icon-container1
+              i.fas.fa-envelope
+            .contact-info
+              p Mail Us Now
+              p strong Pulsecare@hospitalmanagement.com
+      .appointment-form-container
+        form.appointment-form
+          .form-group
+            input(type="text" placeholder="Your Name" required)
+            input(type="email" placeholder="Your Email" required)
+          .form-group
+            input(type="text" placeholder="Your Mobile" required)
+            select(required)
+              option(value="") Choose Doctor
+              option(value="1") Doctor 1
+              option(value="2") Doctor 2
+              option(value="3") Doctor 3
+          .form-group
+            input(type="date" required)
+            input(type="time" required)
+          textarea(placeholder="Describe your problem" required)
+          button.book-btn(type="submit") Book Appointment
+
+  .about-container#about
+    h1 About Us
+    .about-text
+      p
+        | Welcome to Pulse Care, where our mission is to provide high-quality healthcare services to the community. Our hospital has been a cornerstone in providing medical excellence, focusing on patient-centric care, advanced technology, and comprehensive treatment options.
+      p
+        | At Pulse Care, we believe that every patient deserves the best medical attention, and we are committed to delivering it with care, compassion, and professionalism. Our team of highly skilled doctors, nurses, and healthcare professionals work tirelessly to ensure that each patient receives personalized treatment tailored to their needs.
+
+    .mission
+      h2 Our Mission
+      p.about-text
+        | Our mission is to enhance the health and well-being of the communities we serve by providing the highest quality medical services in a compassionate and caring environment.
+
+    .vision
+      h2 Our Vision
+      p.about-text
+        | To be a leading healthcare provider known for delivering excellent and innovative care, while promoting a healthier future for all.
+
+  footer.footer
+    .footer-content
+      .footer-section.hospital-info
+        h4 Hospital Management System
+        p &copy; 2024 Hospital Management System. All rights reserved.
+        p Providing quality healthcare and services for all your medical needs.
+      .footer-section.contact-info
+        h4 Contact Us
+        p Email: info@hospitalmanagement.com
+        p Phone: (123) 456-7890
+        p Address: 123 Health Street, City, State, 12345
+      .footer-section.quick-links
+        h4 Quick Links
+        ul
+          li
+            a(href="#about") About Us
+          li
+            a(href="/services") Our Services
+          li
+            a(href="/departments") Departments
+          li
+            a(href="/appointments") Book an Appointment
+          li
+            a(href="/contact") Contact Us
+
+  script(src="/assests/js/script.js")
